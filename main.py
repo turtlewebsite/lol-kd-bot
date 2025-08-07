@@ -2,8 +2,11 @@ import discord
 import requests
 import asyncio
 import os
+import threading
 
 from discord.ext import commands
+from flask import Flask
+
 import config 
 
 # -------------------- CONFIG --------------------
@@ -18,6 +21,20 @@ SUMMONER_NAME = config.SUMMONER_NAME
 
 CHECK_INTERVAL = config.CHECK_INTERVAL
 KD_THRESHOLD = config.KD_THRESHOLD
+
+# -------------------- FLASK WEB SERVER --------------------
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is alive!"
+
+def run_web():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
+
+# Start Flask web server in a separate thread so it doesn’t block Discord bot
+threading.Thread(target=run_web).start()
 
 # -------------------- DISCORD BOT --------------------
 intents = discord.Intents.default()
