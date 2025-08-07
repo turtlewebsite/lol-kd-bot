@@ -16,7 +16,7 @@ REGION = config.REGION
 MATCH_REGION = config.MATCH_REGION
 
 SUMMONER_NAME = config.SUMMONER_NAME
-
+SUMMONER_PUUID = config.SUMMONER_PUUID
 CHECK_INTERVAL = config.CHECK_INTERVAL
 KD_THRESHOLD = config.KD_THRESHOLD
 
@@ -120,4 +120,5 @@ if __name__ == "__main__":
         print("Starting Discord bot...")
         bot.run(DISCORD_TOKEN)
         print("Bot has stopped.")  # This prints only when the bot disconnects
+
 
