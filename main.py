@@ -5,21 +5,20 @@ import os
 import threading
 from flask import Flask
 from discord.ext import commands
-from dotenv import load_dotenv
-
-# Load environment variables from .env
-load_dotenv()
+import config
 
 # -------------------- CONFIG --------------------
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-DISCORD_CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID", 0))
-RIOT_API_KEY = os.getenv("RIOT_API_KEY")
-REGION = os.getenv("REGION")
-MATCH_REGION = os.getenv("MATCH_REGION")
-SUMMONER_NAME = os.getenv("SUMMONER_NAME")
-SUMMONER_PUUID = os.getenv("SUMMONER_PUUID")
-CHECK_INTERVAL = int(os.getenv("CHECK_INTERVAL", 900))
-KD_THRESHOLD = float(os.getenv("KD_THRESHOLD", 0.7))
+DISCORD_TOKEN = config.DISCORD_TOKEN
+DISCORD_CHANNEL_ID = config.DISCORD_CHANNEL_ID
+
+RIOT_API_KEY = config.RIOT_API_KEY
+REGION = config.REGION
+MATCH_REGION = config.MATCH_REGION
+
+SUMMONER_NAME = config.SUMMONER_NAME
+
+CHECK_INTERVAL = config.CHECK_INTERVAL
+KD_THRESHOLD = config.KD_THRESHOLD
 
 # -------------------- FLASK WEB SERVER --------------------
 app = Flask(__name__)
@@ -121,3 +120,4 @@ if __name__ == "__main__":
         print("Starting Discord bot...")
         bot.run(DISCORD_TOKEN)
         print("Bot has stopped.")  # This prints only when the bot disconnects
+
